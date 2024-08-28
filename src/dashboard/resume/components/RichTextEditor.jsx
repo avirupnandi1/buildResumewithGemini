@@ -5,16 +5,17 @@ import { Brain, LoaderCircle } from 'lucide-react';
 import React, { useContext, useState } from 'react'
 import { BtnBold, BtnBulletList, BtnClearFormatting, BtnItalic, BtnLink, BtnNumberedList, BtnStrikeThrough, BtnStyles, BtnUnderline, Editor, EditorProvider, HtmlButton, Separator, Toolbar } from 'react-simple-wysiwyg'
 import { AIChatSession } from './../../../../service/AImodel';
+import { toast } from 'sonner';
 
 
 const PROMPT='position titile: {positionTitle} , Depends on position title give me 5-7 bullet points for my experience in resume.Return the result as a JSON array of strings, without HTML tags'
 
-function RichTextEditor({onRichTextEditorChange,index}) {
-    const [value,setValue]=useState();
+function RichTextEditor({onRichTextEditorChange,index,defaultValue}) {
+    const [value,setValue]=useState(defaultValue);
     const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
     const [loading,setLoading]=useState(false);
 
-    const GenerateSummeryFromAI=async()=>{
+    const GenerateSummaryFromAI=async()=>{
      
         if(!resumeInfo?.experience[index]?.title)
         {
@@ -36,7 +37,7 @@ function RichTextEditor({onRichTextEditorChange,index}) {
         <div className='flex justify-between my-2'>
             <label className="text-s">Summary</label>
             <Button variant='outline' size='sm' className='flex gap-2 border-purple-500 text-purple-600'
-             onClick={GenerateSummeryFromAI} > 
+             onClick={GenerateSummaryFromAI} > 
            
              {loading?<LoaderCircle className='animate-spin'/>  :
                 

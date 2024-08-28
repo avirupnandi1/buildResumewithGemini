@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import {AIChatSession} from './../../../../../service/AImodel'
 
 
-const prompt="Job Title: {jobTitle} , Depends on job title give me list of  summery for 3 experience level, Mid Level and Freasher level in 3 -4 lines in array format, With summary and experience_level Field in JSON Format"
+const prompt="Job Title: {jobTitle} , Depends on job title give me list of  Summary for 3 experience level, Mid Level and Freasher level in 3 -4 lines in array format, With summary and experience_level Field in JSON Format"
 
 function Summary({enableNext}) {
 
@@ -21,7 +21,7 @@ function Summary({enableNext}) {
 
   
 useEffect(()=>{
-  Summary&&setResumeInfo({
+  summary&&setResumeInfo({
     ...resumeInfo,
     summary:summary
   })
@@ -50,7 +50,7 @@ const onSave=(e)=>{
           summary:summary
       }
   }
-  GlobalAPI.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
+  GlobalAPI.UpdateResumeDetail(params?.resumeID,data).then(resp=>{
       console.log(resp);
       enableNext(true);
       setLoading(false);

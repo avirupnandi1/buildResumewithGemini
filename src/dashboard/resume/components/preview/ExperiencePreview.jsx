@@ -10,7 +10,7 @@ color: resumeInfo?.themeColor
 borderColor:resumeInfo?.themeColor
       }}/>
 
-      {resumeInfo?.experience.map((experience,index)=>(
+      {resumeInfo?.experience?.map((experience,index)=>(
         <div key={index} className='my-5'>
             <h2 className='text-sm font-bold' style={{
                 color: resumeInfo?.themeColor
@@ -19,9 +19,9 @@ borderColor:resumeInfo?.themeColor
                 <span>{experience?.startDate+'-'} {experience?.currentlyWorking?'Present':experience.endDate}</span>
             </h2>
             {/* <p className='text-xs my-2'>
-                {experience?.workSummery}
+                {experience?.workSummary}
             </p> */}
-            <div className='text-xs my-2' dangerouslySetInnerHTML={{__html:experience?.workSummery}}/>
+            <div className='text-xs my-2' dangerouslySetInnerHTML={{__html:experience?.workSummary}}/>
             </div>
       ))}
     </div>

@@ -19,13 +19,13 @@ import { useNavigate } from 'react-router-dom';
 
 function AddResume() {
     const [openDialog, setOpenDialog]=useState(false)
-    const [resumeTitle, setResumeTitle]=useState();
+    const [resumeTitle, setResumeTitle]=useState('');
     const {user}=useUser();
     const [loading, setLoading]=useState(false);
     const navigation=useNavigate();
 
 
-    const onCreate=()=>{
+    const onCreate=async()=>{
       setLoading(true);
       const uuid=uuidv4();
     const data={
@@ -37,10 +37,10 @@ function AddResume() {
       }
     }
     GlobalAPI.CreateNewResume(data).then(resp => {
-      console.log(resp.data.data.id);
+      console.log(resp.data.data.documentId);
       if(resp) {
         setLoading(false);
-        navigation('/dashboard/resume/'+resp.data.data.id+'/edit');
+        navigation('/dashboard/resume/'+resp.data.data.documentId+'/edit');
       }
     }, (error) => {
       console.error("Error creating resume:", error.response ? error.response.data : error);

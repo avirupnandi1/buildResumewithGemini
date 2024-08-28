@@ -15,7 +15,7 @@ const formField={
     state:'',
     startDate:'',
     endDate:'',
-    workSummery:'',
+    workSummary:'',
 
 }
 function Experience() {
@@ -24,10 +24,10 @@ function Experience() {
     const params=useParams();
     const [loading,setLoading]=useState(false);
 
-    // useEffect(()=>{
-    //     resumeInfo?.Experience.length>0&&setExperienceList(resumeInfo?.Experience)
+    useEffect(()=>{
+        resumeInfo&&setExperienceList(resumeInfo?.experience)
         
-    // },[])
+    },[])
 
     const handleChange=(index,event)=>{
         const newEntries=experienceList.slice();
@@ -46,7 +46,7 @@ function Experience() {
             state:'',
             startDate:'',
             endDate:'',
-            workSummery:'',
+            workSummary:'',
         }])
     }
     const RemoveExperience=()=>{
@@ -72,14 +72,15 @@ function Experience() {
     const onSave=()=>{
         setLoading(true)
         const data={
-            data:{
-                Experience:experienceList.map(({ id, ...rest }) => rest)
+            data:
+            {
+                experience:experienceList.map(({ id, ...rest }) => rest)
             }
         }
 
          console.log(experienceList)
 
-        GlobalAPI.UpdateResumeDetail(params?.resumeId,data).then(res=>{
+        GlobalAPI.UpdateResumeDetail(params?.resumeID,data).then(res=>{
             console.log(res);
             setLoading(false);
             toast('Details updated !')
@@ -138,11 +139,11 @@ function Experience() {
                             />
                         </div>
                         <div className='col-span-2'>
-                           {/* Work Summery  */}
+                           {/* Work Summary  */}
                            <RichTextEditor
                            index={index}
-                           defaultValue={item?.workSummery}
-                           onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  
+                           defaultValue={item?.workSummary}
+                           onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummary',index)}  
                         />
                         </div>
                     </div>
