@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useParams } from 'react-router-dom';
 import GlobalAPI from './../../../../../service/GlobalAPI';
 import { LoaderCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 
 function PersonalDetailsForm({enableNext}) {
@@ -38,13 +39,14 @@ function PersonalDetailsForm({enableNext}) {
         setLoading(true);
     
         const data = {
-            data: formData // Wrap formData in a `data` field
+            data: formData 
         };
     
         GlobalAPI.UpdateResumeDetail(params?.resumeID, data).then(resp => {
             console.log(resp);
             enableNext(true);
             setLoading(false);
+            toast("Details Updated")
         }, (error) => {
             console.error('Error updating resume:', error);
             setLoading(false);
@@ -63,37 +65,37 @@ function PersonalDetailsForm({enableNext}) {
                 <div>
                     <label className='text-sm'>First Name</label>
                     <Input name="firstName" 
-                    // defaultValue={resumeInfo?.firstName} 
+                    defaultValue={resumeInfo?.firstName} 
                     required onChange={handleInputChange}  />
                 </div>
                 <div>
                     <label className='text-sm'>Last Name</label>
                     <Input name="lastName" required onChange={handleInputChange} 
-                    // defaultValue={resumeInfo?.lastName}
+                    defaultValue={resumeInfo?.lastName}
                      />
                 </div>
                 <div className='col-span-2'>
                     <label className='text-sm'>Job Title</label>
                     <Input name="jobTitle" required 
-                    // defaultValue={resumeInfo?.jobTitle}
+                    defaultValue={resumeInfo?.jobTitle}
                     onChange={handleInputChange}  />
                 </div>
                 <div className='col-span-2'>
                     <label className='text-sm'>Address</label>
                     <Input name="address" required 
-                    // defaultValue={resumeInfo?.address}
+                    defaultValue={resumeInfo?.address}
                     onChange={handleInputChange}  />
                 </div>
                 <div>
                     <label className='text-sm'>Phone</label>
                     <Input name="phone" required 
-                    // defaultValue={resumeInfo?.phone}
+                    defaultValue={resumeInfo?.phone}
                     onChange={handleInputChange}  />
                 </div>
                 <div>
                     <label className='text-sm'>Email</label>
                     <Input name="email" required 
-                    // defaultValue={resumeInfo?.email}
+                    defaultValue={resumeInfo?.email}
                     onChange={handleInputChange}  />
                 </div>
             </div>
